@@ -1,12 +1,8 @@
-import './App.css'
+import './App.css';
+import { DashboardPage } from '@/components';
 
 function App() {
-  
-  return (
-    <div className="text-8xl">
-      Hello World
-    </div>
-  )
+  return <DashboardPage />;
 }
 
-export default App
+export default App;
