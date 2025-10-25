@@ -12,3 +12,5 @@ export * from './pages';
 
 // UI Components
 export * from './ui/button';
+
+export * from './templates'

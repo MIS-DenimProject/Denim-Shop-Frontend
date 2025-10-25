@@ -1,0 +1,1 @@
+export { ReportsTemplate } from './ReportsTemplate';
