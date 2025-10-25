@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun.lockb
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Local lock and cache files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Vite-specific cache
+.vite/
+vite.config.ts.timestamp-*
+
+# Optional: testing and coverage
+coverage/
+*.lcov
+
+# Optional: misc
+*.log
+*.local
