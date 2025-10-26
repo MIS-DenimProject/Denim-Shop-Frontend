@@ -1,0 +1,1 @@
+export type { HeadingTextProps, TitleProps } from './headingText.types';

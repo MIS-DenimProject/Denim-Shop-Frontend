@@ -1,0 +1,1 @@
+export type { KPIProps } from './KPIprops';

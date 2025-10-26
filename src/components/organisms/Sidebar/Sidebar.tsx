@@ -2,6 +2,7 @@ import { SidebarLogo,SidebarNavigation, SidebarFooter } from '@/components';
 import { cn } from '@/utils';
 import { LayoutDashboard, ShoppingCart, Factory, Package, ClipboardCheck, FileText } from 'lucide-react';
 import type { SidebarProps, NavItem } from '@/utils';
+import type { FC } from 'react';
 
 const navigationItems: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -15,7 +16,7 @@ const navigationItems: NavItem[] = [
 const companyName = 'DenimTech';
 const subtitle = 'Enterprise MIS';
 
-export const Sidebar = ({
+export const Sidebar: FC<SidebarProps> = ({
   userName,
   userRole,
   userAvatar,
