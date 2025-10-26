@@ -2,7 +2,6 @@ import { LayoutDashboard } from "lucide-react";
 
 export const DashboardTemplate = () => {
   return (
-    <div className="p-8">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
         <div className="flex items-center gap-3 mb-6">
@@ -159,6 +158,5 @@ export const DashboardTemplate = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
