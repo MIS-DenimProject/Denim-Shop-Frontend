@@ -1,10 +1,9 @@
-import { OrdersTemplate } from "@/components/templates";
-
+import { OrdersTemplate } from "@/components";
 
 export const OrdersPage = () => {
   return (
     <div className="p-8">
-        <OrdersTemplate/>
+      <OrdersTemplate />
     </div>
   );
 };

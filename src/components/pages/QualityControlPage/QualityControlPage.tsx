@@ -1,5 +1,4 @@
-import { QualityControlTemplate } from "@/components/templates";
-
+import { QualityControlTemplate } from "@/components";
 
 export const QualityControlPage = () => {
   return (

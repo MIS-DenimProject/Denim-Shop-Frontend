@@ -1,40 +1,39 @@
-import type { LucideIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import type { FC } from "react";
+import { ChevronRight } from "lucide-react";
+import { Badge } from "@/components";
+import type { NavigationItemProps } from "@/utils";
 
-interface SidebarNavItemProps {
-  icon: LucideIcon;
-  label: string;
-  isActive?: boolean;
-  onClick?: () => void;
-  className?: string;
-}
-
-export const SidebarNavItem = ({
-  icon: Icon,
-  label,
-  isActive = false,
+export const NavigationItem: FC<NavigationItemProps> = ({
+  item,
+  isActive,
   onClick,
-  className,
-}: SidebarNavItemProps) => {
+}) => {
+  const Icon = item.icon;
+
   return (
     <button
       onClick={onClick}
-      className={cn(
-        'flex items-center gap-3 w-full px-4 py-3 text-sm font-medium transition-all rounded-lg group',
-        'hover:bg-[hsl(var(--color-gray-50))]',
-        isActive
-          ? 'bg-[hsl(var(--color-blue))] text-white hover:bg-[hsl(var(--color-blue-dark))]'
-          : 'text-[hsl(var(--color-gray-700))]',
-        className
-      )}
+      className={`
+        w-full flex items-center justify-between px-4 py-3 rounded-lg 
+        text-sm font-medium transition-all duration-(--transition-speed) 
+        group
+        ${
+          isActive
+            ? "bg-(--sidebar-active) text-(--sidebar-text-active)"
+            : "text-(--sidebar-text) hover:bg-(--sidebar-hover) hover:text-(--sidebar-text-active)"
+        }
+      `}
     >
-      <Icon
-        className={cn(
-          'w-5 h-5 transition-colors',
-          isActive ? 'text-white' : 'text-[hsl(var(--color-gray-500))] group-hover:text-[hsl(var(--color-blue))]'
-        )}
-      />
-      <span>{label}</span>
+      <div className="flex items-center gap-3">
+        <Icon className="w-5 h-5" />
+        <span>{item.label}</span>
+      </div>
+
+      {item.badge ? (
+        <Badge count={item.badge} isActive={isActive} />
+      ) : (
+        <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+      )}
     </button>
   );
 };

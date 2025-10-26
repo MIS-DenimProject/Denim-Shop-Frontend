@@ -1,10 +1,9 @@
-import { ProductionTemplate } from "@/components/templates";
-
+import { ProductionTemplate } from "@/components";
 
 export const ProductionsPage = () => {
   return (
     <div className="p-8">
-        <ProductionTemplate/>
+      <ProductionTemplate />
     </div>
   );
 };

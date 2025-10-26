@@ -1,16 +1,19 @@
-import { SidebarLogo } from '@/components/atoms';
-import { SidebarNavigation, SidebarFooter } from '@/components/molecules';
-import { cn } from '@/lib/utils';
+import { SidebarLogo,SidebarNavigation, SidebarFooter } from '@/components';
+import { cn } from '@/utils';
+import { LayoutDashboard, ShoppingCart, Factory, Package, ClipboardCheck, FileText } from 'lucide-react';
+import type { SidebarProps, NavItem } from '@/utils';
 
-export interface SidebarProps {
-  userName?: string;
-  userRole?: string;
-  userAvatar?: string;
-  onNavigate?: (itemId: string) => void;
-  onLogout?: () => void;
-  activeItemId?: string;
-  className?: string;
-}
+const navigationItems: NavItem[] = [
+  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { id: 'orders', label: 'Orders', icon: ShoppingCart },
+  { id: 'productions', label: 'Productions', icon: Factory },
+  { id: 'inventory', label: 'Inventory', icon: Package },
+  { id: 'quality-control', label: 'Quality Control', icon: ClipboardCheck },
+  { id: 'reports', label: 'Reports', icon: FileText },
+];
+
+const companyName = 'DenimTech';
+const subtitle = 'Enterprise MIS';
 
 export const Sidebar = ({
   userName,
@@ -24,22 +27,16 @@ export const Sidebar = ({
   return (
     <aside
       className={cn(
-        'flex flex-col h-screen w-64 bg-white border-r border-[hsl(var(--color-gray-200))] shadow-sm',
+        'flex flex-col h-screen w-64 bg-(--sidebar-bg) text-white shadow-2xl',
         className
       )}
     >
-      {/* Logo Section */}
-      <SidebarLogo />
-
-      {/* Divider */}
-      <div className="border-t border-[hsl(var(--color-gray-200))]" />
-
-      {/* Navigation Section */}
-      <div className="flex-1 overflow-y-auto py-4 px-3">
-        <SidebarNavigation onNavigate={onNavigate} activeItemId={activeItemId} />
-      </div>
-
-      {/* Footer Section */}
+       <SidebarLogo companyName={companyName} subtitle={subtitle} />
+      <SidebarNavigation 
+        items={navigationItems}
+        onNavigate={onNavigate} 
+        activeItemId={activeItemId} 
+      />
       <SidebarFooter
         userName={userName}
         userRole={userRole}

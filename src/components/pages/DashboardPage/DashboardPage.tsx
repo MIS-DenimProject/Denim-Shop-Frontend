@@ -1,41 +1,39 @@
-import { useState } from 'react';
-import { Sidebar } from '@/components';
-import { OrdersPage } from '../OrdersPage';
-import { ProductionsPage } from '../ProductionsPage';
-import { InventoryPage } from '../InventoryPage';
-import { QualityControlPage } from '../QualityControlPage';
-import { ReportsPage } from '../ReportsPage';
-import  { DashboardTemplate } from '@/components';
+import { useState } from "react";
+import { Sidebar } from "@/components";
+import { OrdersPage } from "../OrdersPage";
+import { ProductionsPage } from "../ProductionsPage";
+import { InventoryPage } from "../InventoryPage";
+import { QualityControlPage } from "../QualityControlPage";
+import { ReportsPage } from "../ReportsPage";
+import { DashboardTemplate } from "@/components";
 
 export const DashboardPage = () => {
-  const [activePage, setActivePage] = useState<string>('dashboard');
+  const [activePage, setActivePage] = useState<string>("dashboard");
 
   const handleNavigate = (itemId: string) => {
     setActivePage(itemId);
   };
 
   const handleLogout = () => {
-    console.log('Logging out...');
+    console.log("Logging out...");
     // Add your logout logic here
   };
 
   const renderContent = () => {
     switch (activePage) {
-      case 'orders':
+      case "orders":
         return <OrdersPage />;
-      case 'productions':
+      case "productions":
         return <ProductionsPage />;
-      case 'inventory':
+      case "inventory":
         return <InventoryPage />;
-      case 'quality-control':
+      case "quality-control":
         return <QualityControlPage />;
-      case 'reports':
+      case "reports":
         return <ReportsPage />;
-      case 'dashboard':
+      case "dashboard":
       default:
-        return (
-          <DashboardTemplate />
-        );
+        return <DashboardTemplate />;
     }
   };
 

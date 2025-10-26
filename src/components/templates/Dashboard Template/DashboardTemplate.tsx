@@ -162,5 +162,3 @@ export const DashboardTemplate = () => {
     </div>
   );
 };
-
-

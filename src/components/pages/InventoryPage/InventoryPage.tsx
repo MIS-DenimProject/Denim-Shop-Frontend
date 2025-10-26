@@ -1,10 +1,10 @@
-import { InventoryTemplate } from "@/components/templates/Inventory Template/InventoryTemplate";
+import { InventoryTemplate } from "@/components";
 
 
 export const InventoryPage = () => {
   return (
     <div className="p-8">
-        <InventoryTemplate/>
+      <InventoryTemplate />
     </div>
   );
 };

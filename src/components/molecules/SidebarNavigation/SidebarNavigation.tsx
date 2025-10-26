@@ -1,42 +1,18 @@
-import type { LucideIcon } from 'lucide-react';
-import {
-  LayoutDashboard,
-  ShoppingCart,
-  Factory,
-  Package,
-  ClipboardCheck,
-  FileText,
-} from 'lucide-react';
-import { SidebarNavItem } from '@/components/atoms';
-import { useState } from 'react';
+import type { FC } from "react";
+import { NavigationItem } from "@/components";
+import { useState } from "react";
+import { cn } from "@/utils";
+import type { SidebarNavigationProps } from "@/utils";
 
-export interface NavItem {
-  id: string;
-  label: string;
-  icon: LucideIcon;
-}
-
-interface SidebarNavigationProps {
-  onNavigate?: (itemId: string) => void;
-  activeItemId?: string;
-  className?: string;
-}
-
-const navigationItems: NavItem[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'orders', label: 'Orders', icon: ShoppingCart },
-  { id: 'productions', label: 'Productions', icon: Factory },
-  { id: 'inventory', label: 'Inventory', icon: Package },
-  { id: 'quality-control', label: 'Quality Control', icon: ClipboardCheck },
-  { id: 'reports', label: 'Reports', icon: FileText },
-];
-
-export const SidebarNavigation = ({
-  onNavigate,
+export const SidebarNavigation: FC<SidebarNavigationProps> = ({
   activeItemId,
   className,
-}: SidebarNavigationProps) => {
-  const [activeItem, setActiveItem] = useState(activeItemId || 'dashboard');
+  items = [],
+  onNavigate,
+}) => {
+  const [activeItem, setActiveItem] = useState(
+    activeItemId || items[0]?.id || "dashboard"
+  );
 
   const handleItemClick = (itemId: string) => {
     setActiveItem(itemId);
@@ -44,13 +20,12 @@ export const SidebarNavigation = ({
   };
 
   return (
-    <nav className={className}>
-      <div className="flex flex-col gap-1">
-        {navigationItems.map((item) => (
-          <SidebarNavItem
+    <nav className={cn(`flex-1 overflow-y-auto py-4 px-3`, className)}>
+      <div className="space-y-1">
+        {items.map((item) => (
+          <NavigationItem
             key={item.id}
-            icon={item.icon}
-            label={item.label}
+            item={item}
             isActive={activeItem === item.id}
             onClick={() => handleItemClick(item.id)}
           />

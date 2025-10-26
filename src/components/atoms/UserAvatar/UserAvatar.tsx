@@ -1,41 +1,35 @@
-import { User } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import type { FC } from "react";
+import type { UserAvatarProps } from "@/utils";
 
-interface UserAvatarProps {
-  name?: string;
-  role?: string;
-  avatarUrl?: string;
-  className?: string;
-}
-
-export const UserAvatar = ({ name, role, avatarUrl, className }: UserAvatarProps) => {
+export const UserAvatar: FC<UserAvatarProps> = ({
+  name = "John Doe",
+  role = "Production Manager",
+  avatarUrl,
+}) => {
   const initials = name
-    ? name
-        .split(' ')
-        .map((n) => n[0])
-        .join('')
-        .toUpperCase()
-        .slice(0, 2)
-    : '';
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase();
 
   return (
-    <div className={cn('flex items-center gap-3', className)}>
-      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(var(--color-gray-100))] text-[hsl(var(--color-gray-600))] overflow-hidden">
-        {avatarUrl ? (
-          <img src={avatarUrl} alt={name || 'User'} className="w-full h-full object-cover" />
-        ) : initials ? (
-          <span className="text-sm font-semibold">{initials}</span>
-        ) : (
-          <User className="w-5 h-5" />
-        )}
-      </div>
-      <div className="flex flex-col flex-1 min-w-0">
-        <p className="text-sm font-semibold text-[hsl(var(--color-gray-900))] truncate">
-          {name || 'Guest User'}
+    <div className="flex items-center gap-3 px-2">
+      {avatarUrl ? (
+        <img
+          src={avatarUrl}
+          alt={name}
+          className="w-10 h-10 rounded-full object-cover"
+        />
+      ) : (
+        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-(--denim-600) text-(--neutral-white) font-semibold text-sm">
+          {initials}
+        </div>
+      )}
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-semibold truncate text-(--neutral-white)">
+          {name}
         </p>
-        <p className="text-xs text-[hsl(var(--color-gray-500))] truncate">
-          {role || 'Administrator'}
-        </p>
+        <p className="text-xs truncate text-(--neutral-400)">{role}</p>
       </div>
     </div>
   );

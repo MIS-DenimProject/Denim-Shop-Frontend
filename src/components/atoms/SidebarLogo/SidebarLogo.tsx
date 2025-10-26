@@ -1,23 +1,28 @@
-import { Factory } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import type { FC } from "react";
+import { Factory } from "lucide-react";
+import { cn } from "@/utils";
+import type { SidebarLogoProps } from "@/utils";
 
-interface SidebarLogoProps {
-  className?: string;
-}
-
-export const SidebarLogo = ({ className }: SidebarLogoProps) => {
+export const SidebarLogo: FC<SidebarLogoProps> = ({
+  companyName = "DenimTech",
+  subtitle = "Enterprise MIS",
+  className = "",
+}) => {
   return (
-    <div className={cn('flex items-center gap-3 px-4 py-6', className)}>
-      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-[hsl(var(--color-blue))] text-white">
-        <Factory className="w-6 h-6" />
+    <div
+      className={cn(
+        `flex items-center gap-3 px-6 py-5 border-b border-(--sidebar-border)`,
+        className
+      )}
+    >
+      <div className="sidebar-gradient-logo flex items-center justify-center w-11 h-11 rounded-xl shadow-lg">
+        <Factory className="w-6 h-6 text-(--neutral-white)" />
       </div>
       <div className="flex flex-col">
-        <h1 className="text-sm font-bold text-[hsl(var(--color-gray-900))] leading-tight">
-          Denim Factory MIS
+        <h1 className="text-lg font-bold tracking-tight text-(--neutral-white)">
+          {companyName}
         </h1>
-        <p className="text-xs font-medium text-[hsl(var(--color-gray-500))]">
-          Management System
-        </p>
+        <p className="text-xs font-medium text-(--neutral-300)">{subtitle}</p>
       </div>
     </div>
   );
