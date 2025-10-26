@@ -1,0 +1,1 @@
+export { QualityControlTemplate } from './QualityControlTemplate';
