@@ -1,1 +1,1 @@
-export type { KPIProps } from './KPIprops';
+export type { KPIProps } from './KPIProps';

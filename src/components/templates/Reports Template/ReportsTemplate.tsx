@@ -17,13 +17,80 @@ import { Title } from "@/components/molecules/Title";
 
 type TabType = 'production' | 'sales' | 'quality' | 'inventory';
 
+interface StageEfficiency {
+  stage: string;
+  throughput: number;
+  efficiency: number;
+}
+
+interface MonthlyData {
+  month: string;
+  value: number;
+}
+
+interface TopCustomer {
+  name: string;
+  orders: number;
+  revenue: string;
+  growth: string;
+}
+
+interface QualityStage {
+  stage: string;
+  passRate: number;
+  inspected: number;
+}
+
+interface DefectType {
+  type: string;
+  percentage: number;
+}
+
+interface InventoryItem {
+  material: string;
+  stock: number;
+  unit: string;
+  status: string;
+  reorderPoint: number;
+  usage: number;
+}
+
+interface BaseReportData {
+  reportType: TabType;
+  timeRange: string;
+  generatedAt: string;
+  generatedBy: string;
+  kpis: Record<string, string | number>;
+}
+
+interface ProductionReportData extends BaseReportData {
+  stageEfficiency: StageEfficiency[];
+  monthlyProduction: MonthlyData[];
+}
+
+interface SalesReportData extends BaseReportData {
+  topCustomers: TopCustomer[];
+  monthlyRevenue: MonthlyData[];
+}
+
+interface QualityReportData extends BaseReportData {
+  qualityByStage: QualityStage[];
+  defectTypes: DefectType[];
+}
+
+interface InventoryReportData extends BaseReportData {
+  inventory: InventoryItem[];
+}
+
+type ReportData = ProductionReportData | SalesReportData | QualityReportData | InventoryReportData;
+
 export const ReportsTemplate = () => {
   const [timeRange, setTimeRange] = useState("last30days");
   const [reportType, setReportType] = useState<TabType>("production");
   const [activeTab, setActiveTab] = useState<TabType>("production");
 
   // Data for CSV export
-  const getExportData = () => {
+  const getExportData = (): ReportData => {
     const timestamp = new Date().toISOString();
     
     const baseData = {
@@ -141,11 +208,16 @@ export const ReportsTemplate = () => {
         };
       
       default:
-        return baseData;
+        return {
+          ...baseData,
+          kpis: {},
+          stageEfficiency: [],
+          monthlyProduction: [],
+        } as ProductionReportData;
     }
   };
 
-  const convertToCSV = (data: any): string => {
+  const convertToCSV = (data: ReportData): string => {
     let csv = '';
     
     // Add header information
@@ -165,56 +237,64 @@ export const ReportsTemplate = () => {
     // Add specific data based on report type
     switch (data.reportType) {
       case 'production':
-        csv += 'STAGE EFFICIENCY\n';
-        csv += 'Stage,Throughput (units/day),Efficiency (%)\n';
-        data.stageEfficiency.forEach((stage: any) => {
-          csv += `${stage.stage},${stage.throughput},${stage.efficiency}\n`;
-        });
-        csv += '\n';
-        
-        csv += 'MONTHLY PRODUCTION\n';
-        csv += 'Month,Production (units)\n';
-        data.monthlyProduction.forEach((month: any) => {
-          csv += `${month.month},${month.value}\n`;
-        });
+        if ('stageEfficiency' in data && 'monthlyProduction' in data) {
+          csv += 'STAGE EFFICIENCY\n';
+          csv += 'Stage,Throughput (units/day),Efficiency (%)\n';
+          data.stageEfficiency.forEach((stage) => {
+            csv += `${stage.stage},${stage.throughput},${stage.efficiency}\n`;
+          });
+          csv += '\n';
+          
+          csv += 'MONTHLY PRODUCTION\n';
+          csv += 'Month,Production (units)\n';
+          data.monthlyProduction.forEach((month) => {
+            csv += `${month.month},${month.value}\n`;
+          });
+        }
         break;
       
       case 'sales':
-        csv += 'TOP CUSTOMERS\n';
-        csv += 'Customer Name,Orders,Revenue,Growth\n';
-        data.topCustomers.forEach((customer: any) => {
-          csv += `${customer.name},${customer.orders},${customer.revenue},${customer.growth}\n`;
-        });
-        csv += '\n';
-        
-        csv += 'MONTHLY REVENUE\n';
-        csv += 'Month,Revenue ($)\n';
-        data.monthlyRevenue.forEach((month: any) => {
-          csv += `${month.month},${month.value}\n`;
-        });
+        if ('topCustomers' in data && 'monthlyRevenue' in data) {
+          csv += 'TOP CUSTOMERS\n';
+          csv += 'Customer Name,Orders,Revenue,Growth\n';
+          data.topCustomers.forEach((customer) => {
+            csv += `${customer.name},${customer.orders},${customer.revenue},${customer.growth}\n`;
+          });
+          csv += '\n';
+          
+          csv += 'MONTHLY REVENUE\n';
+          csv += 'Month,Revenue ($)\n';
+          data.monthlyRevenue.forEach((month) => {
+            csv += `${month.month},${month.value}\n`;
+          });
+        }
         break;
       
       case 'quality':
-        csv += 'QUALITY BY STAGE\n';
-        csv += 'Stage,Pass Rate (%),Items Inspected\n';
-        data.qualityByStage.forEach((stage: any) => {
-          csv += `${stage.stage},${stage.passRate},${stage.inspected}\n`;
-        });
-        csv += '\n';
-        
-        csv += 'DEFECT TYPES DISTRIBUTION\n';
-        csv += 'Defect Type,Percentage (%)\n';
-        data.defectTypes.forEach((defect: any) => {
-          csv += `${defect.type},${defect.percentage}\n`;
-        });
+        if ('qualityByStage' in data && 'defectTypes' in data) {
+          csv += 'QUALITY BY STAGE\n';
+          csv += 'Stage,Pass Rate (%),Items Inspected\n';
+          data.qualityByStage.forEach((stage) => {
+            csv += `${stage.stage},${stage.passRate},${stage.inspected}\n`;
+          });
+          csv += '\n';
+          
+          csv += 'DEFECT TYPES DISTRIBUTION\n';
+          csv += 'Defect Type,Percentage (%)\n';
+          data.defectTypes.forEach((defect) => {
+            csv += `${defect.type},${defect.percentage}\n`;
+          });
+        }
         break;
       
       case 'inventory':
-        csv += 'INVENTORY STATUS\n';
-        csv += 'Material,Current Stock,Unit,Status,Reorder Point,Usage (%)\n';
-        data.inventory.forEach((item: any) => {
-          csv += `${item.material},${item.stock},${item.unit},${item.status},${item.reorderPoint},${item.usage}\n`;
-        });
+        if ('inventory' in data) {
+          csv += 'INVENTORY STATUS\n';
+          csv += 'Material,Current Stock,Unit,Status,Reorder Point,Usage (%)\n';
+          data.inventory.forEach((item) => {
+            csv += `${item.material},${item.stock},${item.unit},${item.status},${item.reorderPoint},${item.usage}\n`;
+          });
+        }
         break;
     }
     
