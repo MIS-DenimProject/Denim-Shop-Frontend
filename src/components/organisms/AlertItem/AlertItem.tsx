@@ -117,7 +117,7 @@ export function InventoryAlerts() {
     <div className="w-full max-w-2xl p-4 bg-white rounded-2xl shadow-md border border-gray-200">
       {/* Enterprise-level Topic/Header */}
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-gray-900">
+        <h2 className="text-xl font-semibold text-gray-900">
           Inventory Alerts
         </h2>
         <p className="text-sm text-muted-foreground">

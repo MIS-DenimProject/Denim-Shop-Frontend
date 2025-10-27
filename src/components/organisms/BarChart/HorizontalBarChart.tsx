@@ -19,17 +19,17 @@ import {
 export const description = "A bar chart with a label"
 
 const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { day: "Monday", production: 186 },
+  { day: "Tuesday", production: 305 },
+  { day: "Wednesday", production: 237 },
+  { day: "Thursday", production: 73 },
+  { day: "Friday", production: 209 },
+  { day: "Saturday", production: 214 },
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  production: {
+    label: "production",
     color: "var(--denim-700)",
   },
 } satisfies ChartConfig
@@ -38,8 +38,8 @@ export const HorizontalBarChart: FC = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Horizontal</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Daily Production</CardTitle>
+        <CardDescription>Current Week</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -52,7 +52,7 @@ export const HorizontalBarChart: FC = () => {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="day"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
@@ -62,7 +62,7 @@ export const HorizontalBarChart: FC = () => {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
+            <Bar dataKey="production" fill="var(--color-production)" radius={8}>
               <LabelList
                 position="top"
                 offset={12}
@@ -75,10 +75,10 @@ export const HorizontalBarChart: FC = () => {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Trending up by 5.2% this day <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
+          Showing total visitors for the last 6 days
         </div>
       </CardFooter>
     </Card>

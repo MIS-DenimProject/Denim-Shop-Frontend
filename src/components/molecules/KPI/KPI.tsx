@@ -30,7 +30,7 @@ export const KPI: FC<KPIProps> = ({
           <p className="text-sm text-(--color-text-muted) font-medium">
             {title}
           </p>
-          <h3 className="text-3xl font-semibold text-(--color-text-heading) mt-1 tabular-nums">
+          <h3 className="text-2xl font-semibold text-(--color-text-heading) mt-1 tabular-nums">
             {value}
           </h3>
         </div>
