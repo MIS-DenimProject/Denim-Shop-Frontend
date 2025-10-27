@@ -34,7 +34,7 @@ export const ReportCharts: FC = () => {
       {/* Production vs Target */}
       <Card className="shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-base md:text-lg font-semibold">Production vs Target</CardTitle>
+          <CardTitle className="text-base md:text-lg font-semibold">Production</CardTitle>
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={250}>

@@ -1,5 +1,5 @@
 import { Factory } from "lucide-react";
-import { ProductionPipeline, ProductionTable, ProductionTimeline } from "@/components";
+import { ProductionPipelineT, ProductionTable, ProductionTimeline } from "@/components";
 
 export const ProductionTemplate = () => {
   // Pipeline data
@@ -125,7 +125,7 @@ export const ProductionTemplate = () => {
       </div>
 
       {/* Production Pipeline Section */}
-      <ProductionPipeline data={pipelineData} />
+      <ProductionPipelineT data={pipelineData} />
 
       {/* Production Items Table Section */}
       <ProductionTable items={productionItems} />

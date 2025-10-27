@@ -1,45 +1,13 @@
-import type { FC } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+import type { FC } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 
-interface PipelineStage {
-  id: string;
-  name: string;
-  units: number;
-  progress: number;
-}
-
-const pipelineStages: PipelineStage[] = [
-  {
-    id: '1',
-    name: 'Cutting',
-    units: 450,
-    progress: 100,
-  },
-  {
-    id: '2',
-    name: 'Assembling',
-    units: 380,
-    progress: 84,
-  },
-  {
-    id: '3',
-    name: 'Sewing',
-    units: 320,
-    progress: 71,
-  },
-  {
-    id: '4',
-    name: 'Dyeing',
-    units: 280,
-    progress: 62,
-  },
-  {
-    id: '5',
-    name: 'Ironing/QC',
-    units: 245,
-    progress: 54,
-  },
+const pipelineStages = [
+  { id: 1, name: "Cutting", units: 450, progress: 92 },
+  { id: 2, name: "Assembling", units: 380, progress: 88 },
+  { id: 3, name: "Sewing", units: 320, progress: 90 },
+  { id: 4, name: "Dyeing", units: 280, progress: 85 },
+  { id: 5, name: "Ironing/QC", units: 245, progress: 94 },
 ];
 
 export const ProductionPipeline: FC = () => {
@@ -71,32 +39,5 @@ export const ProductionPipeline: FC = () => {
         </div>
       </CardContent>
     </Card>
-import type { FC } from "react";
-import { PipelineStageCard } from "@/components";
-
-interface PipelineData {
-  stage: "Cutting" | "Assembling" | "Sewing" | "Dyeing" | "Ironing/QC";
-  count: number;
-}
-
-interface ProductionPipelineProps {
-  data: PipelineData[];
-}
-
-export const ProductionPipeline: FC<ProductionPipelineProps> = ({ data }) => {
-  return (
-    <div className="bg-white rounded-xl border border-neutral-200 shadow-sm p-8">
-      <h2 className="text-xl font-bold text-neutral-900 mb-6">Production Pipeline</h2>
-      <div className="flex items-center justify-between">
-        {data.map((item, index) => (
-          <PipelineStageCard 
-            key={item.stage}
-            stage={item.stage}
-            count={item.count}
-            showArrow={index < data.length - 1}
-          />
-        ))}
-      </div>
-    </div>
   );
 };

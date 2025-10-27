@@ -11,6 +11,7 @@ export * from './ReportCharts'
 export * from './StageEfficiency'
 export * from './ReportTabs'
 export * from './ProductionPipeline';
+export * from './ProductionPipelineT';
 export * from './ProductionTable';
 export * from './ProductionTimeline';
 export * from './StatsOverview';
