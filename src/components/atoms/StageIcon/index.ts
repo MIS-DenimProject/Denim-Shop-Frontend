@@ -1,0 +1,1 @@
+export { StageIcon } from "./StageIcon";
