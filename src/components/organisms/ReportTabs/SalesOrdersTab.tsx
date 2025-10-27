@@ -65,23 +65,23 @@ export const SalesOrdersTab: FC = () => {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         {/* Revenue Trend */}
         <Card className="shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg font-semibold">Revenue Trend</CardTitle>
+            <CardTitle className="text-base md:text-lg font-semibold">Revenue Trend</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={250}>
               <LineChart data={revenueData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis 
                   dataKey="month" 
-                  tick={{ fontSize: 12 }}
+                  tick={{ fontSize: 11 }}
                   stroke="#9ca3af"
                 />
                 <YAxis 
-                  tick={{ fontSize: 12 }}
+                  tick={{ fontSize: 11 }}
                   stroke="#9ca3af"
                 />
                 <Tooltip 
@@ -89,6 +89,7 @@ export const SalesOrdersTab: FC = () => {
                     backgroundColor: '#fff',
                     border: '1px solid #e5e7eb',
                     borderRadius: '8px',
+                    fontSize: '12px',
                   }}
                 />
                 <Line 
@@ -96,8 +97,8 @@ export const SalesOrdersTab: FC = () => {
                   dataKey="value" 
                   stroke="#10b981" 
                   strokeWidth={2}
-                  dot={{ fill: '#10b981', r: 4 }}
-                  activeDot={{ r: 6 }}
+                  dot={{ fill: '#10b981', r: 3 }}
+                  activeDot={{ r: 5 }}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -107,19 +108,19 @@ export const SalesOrdersTab: FC = () => {
         {/* Orders Status */}
         <Card className="shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg font-semibold">Orders Status</CardTitle>
+            <CardTitle className="text-base md:text-lg font-semibold">Orders Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={250}>
               <BarChart data={ordersData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis 
                   dataKey="month" 
-                  tick={{ fontSize: 12 }}
+                  tick={{ fontSize: 11 }}
                   stroke="#9ca3af"
                 />
                 <YAxis 
-                  tick={{ fontSize: 12 }}
+                  tick={{ fontSize: 11 }}
                   stroke="#9ca3af"
                 />
                 <Tooltip 
@@ -127,6 +128,7 @@ export const SalesOrdersTab: FC = () => {
                     backgroundColor: '#fff',
                     border: '1px solid #e5e7eb',
                     borderRadius: '8px',
+                    fontSize: '12px',
                   }}
                 />
                 <Bar dataKey="completed" fill="#10b981" radius={[4, 4, 0, 0]} />
@@ -144,7 +146,7 @@ export const SalesOrdersTab: FC = () => {
           <CardTitle className="text-lg font-semibold">Top Customers</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {[
               { name: 'Blue Denim Wholesale', orders: 24, revenue: '$156,240', growth: '+15%' },
               { name: 'Fashion Plus Co.', orders: 18, revenue: '$127,890', growth: '+22%' },
@@ -154,15 +156,15 @@ export const SalesOrdersTab: FC = () => {
             ].map((customer, index) => (
               <div 
                 key={index} 
-                className="flex items-center justify-between p-4 border border-(--color-border) rounded-lg hover:bg-(--color-muted) transition-colors"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-3 md:p-4 border border-(--color-border) rounded-lg hover:bg-(--color-muted) transition-colors"
               >
-                <div className="flex-1">
-                  <h4 className="font-semibold text-(--color-foreground)">{customer.name}</h4>
-                  <p className="text-sm text-(--color-muted-foreground)">{customer.orders} orders</p>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-semibold text-sm md:text-base text-(--color-foreground) truncate">{customer.name}</h4>
+                  <p className="text-xs md:text-sm text-(--color-muted-foreground)">{customer.orders} orders</p>
                 </div>
-                <div className="text-right">
-                  <p className="font-bold text-(--color-foreground)">{customer.revenue}</p>
-                  <p className="text-sm text-green-600">{customer.growth}</p>
+                <div className="flex items-center justify-between sm:flex-col sm:items-end gap-2 sm:gap-1 shrink-0">
+                  <p className="font-bold text-sm md:text-base text-(--color-foreground)">{customer.revenue}</p>
+                  <p className="text-xs md:text-sm text-green-600 font-medium">{customer.growth}</p>
                 </div>
               </div>
             ))}

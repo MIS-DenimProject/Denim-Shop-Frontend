@@ -61,23 +61,23 @@ export const QualityTab: FC = () => {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         {/* Defect Rate Trend */}
         <Card className="shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg font-semibold">Defect Rate Trend</CardTitle>
+            <CardTitle className="text-base md:text-lg font-semibold">Defect Rate Trend</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={250}>
               <BarChart data={defectData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis 
                   dataKey="month" 
-                  tick={{ fontSize: 12 }}
+                  tick={{ fontSize: 11 }}
                   stroke="#9ca3af"
                 />
                 <YAxis 
-                  tick={{ fontSize: 12 }}
+                  tick={{ fontSize: 11 }}
                   stroke="#9ca3af"
                   domain={[0, 3]}
                 />
@@ -86,6 +86,7 @@ export const QualityTab: FC = () => {
                     backgroundColor: '#fff',
                     border: '1px solid #e5e7eb',
                     borderRadius: '8px',
+                    fontSize: '12px',
                   }}
                 />
                 <Bar dataKey="rate" fill="#ef4444" radius={[4, 4, 0, 0]} />
@@ -97,10 +98,10 @@ export const QualityTab: FC = () => {
         {/* Defect Types Distribution */}
         <Card className="shadow-sm">
           <CardHeader className="pb-3">
-            <CardTitle className="text-lg font-semibold">Defect Types Distribution</CardTitle>
+            <CardTitle className="text-base md:text-lg font-semibold">Defect Types Distribution</CardTitle>
           </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+          <CardContent className="flex justify-center">
+            <ResponsiveContainer width="100%" height={250}>
               <PieChart>
                 <Pie
                   data={defectTypes}
@@ -108,15 +109,16 @@ export const QualityTab: FC = () => {
                   cy="50%"
                   labelLine={false}
                   label={(entry) => `${entry.name}: ${entry.value}%`}
-                  outerRadius={80}
+                  outerRadius={70}
                   fill="#8884d8"
                   dataKey="value"
+                  style={{ fontSize: '11px' }}
                 >
                   {defectTypes.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip contentStyle={{ fontSize: '12px' }} />
               </PieChart>
             </ResponsiveContainer>
           </CardContent>
@@ -128,7 +130,7 @@ export const QualityTab: FC = () => {
         <CardHeader className="pb-3">
           <CardTitle className="text-lg font-semibold">Quality Metrics by Stage</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4">
           {[
             { stage: 'Cutting', passRate: 96.5, inspected: 4520 },
             { stage: 'Assembling', passRate: 94.2, inspected: 3850 },
@@ -136,17 +138,17 @@ export const QualityTab: FC = () => {
             { stage: 'Dyeing', passRate: 91.5, inspected: 2890 },
             { stage: 'Finishing', passRate: 95.3, inspected: 2650 },
           ].map((item, index) => (
-            <div key={index} className="space-y-2">
-              <div className="flex items-center justify-between">
-                <div>
+            <div key={index} className="space-y-1.5">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
                   <span className="text-sm font-semibold text-(--color-foreground)">{item.stage}</span>
-                  <span className="text-xs text-(--color-muted-foreground) ml-2">
-                    {item.inspected} items inspected
+                  <span className="text-xs text-(--color-muted-foreground)">
+                    {item.inspected} items
                   </span>
                 </div>
                 <span className="text-sm font-bold text-(--color-foreground)">{item.passRate}%</span>
               </div>
-              <Progress value={item.passRate} className="h-2 bg-(--color-muted)" />
+              <Progress value={item.passRate} className="h-1.5 bg-(--color-muted)" />
             </div>
           ))}
         </CardContent>

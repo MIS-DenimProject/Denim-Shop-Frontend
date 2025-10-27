@@ -30,23 +30,23 @@ const productionTrendData = [
 
 export const ReportCharts: FC = () => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
       {/* Production vs Target */}
       <Card className="shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg font-semibold">Production vs Target</CardTitle>
+          <CardTitle className="text-base md:text-lg font-semibold">Production vs Target</CardTitle>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={productionVsTargetData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis 
                 dataKey="month" 
-                tick={{ fontSize: 12 }}
+                tick={{ fontSize: 11 }}
                 stroke="#9ca3af"
               />
               <YAxis 
-                tick={{ fontSize: 12 }}
+                tick={{ fontSize: 11 }}
                 stroke="#9ca3af"
               />
               <Tooltip 
@@ -54,6 +54,7 @@ export const ReportCharts: FC = () => {
                   backgroundColor: '#fff',
                   border: '1px solid #e5e7eb',
                   borderRadius: '8px',
+                  fontSize: '12px',
                 }}
               />
               <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
@@ -65,19 +66,19 @@ export const ReportCharts: FC = () => {
       {/* Production Trend */}
       <Card className="shadow-sm">
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg font-semibold">Production Trend</CardTitle>
+          <CardTitle className="text-base md:text-lg font-semibold">Production Trend</CardTitle>
         </CardHeader>
         <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <LineChart data={productionTrendData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
               <XAxis 
                 dataKey="month" 
-                tick={{ fontSize: 12 }}
+                tick={{ fontSize: 11 }}
                 stroke="#9ca3af"
               />
               <YAxis 
-                tick={{ fontSize: 12 }}
+                tick={{ fontSize: 11 }}
                 stroke="#9ca3af"
               />
               <Tooltip 
@@ -85,6 +86,7 @@ export const ReportCharts: FC = () => {
                   backgroundColor: '#fff',
                   border: '1px solid #e5e7eb',
                   borderRadius: '8px',
+                  fontSize: '12px',
                 }}
               />
               <Line 
@@ -92,8 +94,8 @@ export const ReportCharts: FC = () => {
                 dataKey="value" 
                 stroke="#3b82f6" 
                 strokeWidth={2}
-                dot={{ fill: '#3b82f6', r: 4 }}
-                activeDot={{ r: 6 }}
+                dot={{ fill: '#3b82f6', r: 3 }}
+                activeDot={{ r: 5 }}
               />
             </LineChart>
           </ResponsiveContainer>

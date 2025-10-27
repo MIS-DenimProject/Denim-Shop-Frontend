@@ -44,27 +44,27 @@ const pipelineStages: PipelineStage[] = [
 
 export const ProductionPipeline: FC = () => {
   return (
-    <Card className="w-full shadow-sm hover:shadow-md transition-shadow duration-200">
+    <Card className="w-full h-full shadow-sm hover:shadow-md transition-shadow duration-200">
       <CardHeader className="pb-3">
-        <CardTitle className="text-xl font-semibold text-(--color-foreground)">
-          Production Pipeline Status
+        <CardTitle className="text-lg font-semibold text-(--color-foreground)">
+          Production Pipeline
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-2">
-        <div className="space-y-6">
+        <div className="space-y-4">
           {pipelineStages.map((stage) => (
-            <div key={stage.id} className="space-y-2">
+            <div key={stage.id} className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-(--color-foreground)">
                   {stage.name}
                 </span>
-                <span className="text-sm font-semibold text-(--color-muted-foreground)">
-                  {stage.units} units in progress
+                <span className="text-xs font-semibold text-(--color-muted-foreground)">
+                  {stage.units} units
                 </span>
               </div>
               <Progress 
                 value={stage.progress} 
-                className="h-2.5 bg-(--color-muted)"
+                className="h-2 bg-(--color-muted)"
               />
             </div>
           ))}

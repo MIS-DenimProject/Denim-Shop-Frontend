@@ -51,39 +51,39 @@ const stageData: StageData[] = [
 
 export const StageEfficiency: FC = () => {
   return (
-    <Card className="shadow-sm">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-xl font-semibold">Stage Efficiency Analysis</CardTitle>
+    <Card className="shadow-sm hover:shadow-md transition-shadow duration-200">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-lg font-semibold">Stage Efficiency Analysis</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-3">
         {stageData.map((stage) => (
           <div 
             key={stage.id} 
-            className="p-4 border border-(--color-border) rounded-lg hover:bg-(--color-muted) transition-colors duration-150"
+            className="p-3 md:p-4 border border-(--color-border) rounded-lg hover:bg-(--color-muted) transition-colors duration-150"
           >
-            <div className="flex items-start justify-between mb-2">
-              <div className="flex-1">
-                <div className="flex items-center gap-3 mb-1">
-                  <h3 className="text-base font-semibold text-(--color-foreground)">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <h3 className="text-sm font-semibold text-(--color-foreground)">
                     {stage.name}
                   </h3>
                   {stage.trend === 'up' ? (
-                    <TrendingUp className="w-4 h-4 text-green-600" />
+                    <TrendingUp className="w-4 h-4 text-green-600 shrink-0" />
                   ) : (
-                    <TrendingDown className="w-4 h-4 text-red-600" />
+                    <TrendingDown className="w-4 h-4 text-red-600 shrink-0" />
                   )}
                 </div>
-                <p className="text-sm text-(--color-muted-foreground)">
+                <p className="text-xs text-(--color-muted-foreground)">
                   {stage.throughput}
                 </p>
               </div>
-              <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-black text-white font-bold text-sm shrink-0">
+              <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-lg bg-black text-white font-bold text-xs md:text-sm shrink-0">
                 {stage.efficiency}%
               </div>
             </div>
             <Progress 
               value={stage.efficiency} 
-              className="h-2 bg-(--color-muted)"
+              className="h-1.5 bg-(--color-muted)"
             />
           </div>
         ))}

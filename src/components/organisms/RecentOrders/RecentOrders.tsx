@@ -64,22 +64,22 @@ const getStatusColor = (status: Order['status']) => {
 
 export const RecentOrders: FC = () => {
   return (
-    <Card className="w-full shadow-sm hover:shadow-md transition-shadow duration-200">
+    <Card className="w-full h-full shadow-sm hover:shadow-md transition-shadow duration-200">
       <CardHeader className="pb-3">
-        <CardTitle className="text-xl font-semibold text-(--color-foreground)">
+        <CardTitle className="text-lg font-semibold text-(--color-foreground)">
           Recent Orders
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-2">
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {orders.map((order) => (
             <div
               key={order.id}
-              className="flex items-center justify-between py-4 px-4 border border-(--color-border) rounded-lg hover:bg-(--color-muted) transition-colors duration-150"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 py-3 px-3 border border-(--color-border) rounded-lg hover:bg-(--color-muted) transition-colors duration-150"
             >
-              <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-3">
-                  <span className="font-semibold text-(--denim-600) hover:text-(--denim-700) cursor-pointer transition-colors">
+              <div className="flex flex-col gap-1 min-w-0 flex-1">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-semibold text-sm text-(--denim-600) hover:text-(--denim-700) cursor-pointer transition-colors">
                     {order.orderNumber}
                   </span>
                   {order.stage !== 'Completed' && (
@@ -88,21 +88,21 @@ export const RecentOrders: FC = () => {
                     </span>
                   )}
                   {order.stage === 'Completed' && (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-black text-white">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-black text-white">
                       Completed
                     </span>
                   )}
                 </div>
-                <span className="text-sm text-(--color-muted-foreground)">
+                <span className="text-xs text-(--color-muted-foreground) truncate">
                   {order.customer}
                 </span>
               </div>
-              <div className="flex flex-col items-end gap-1">
-                <span className="font-semibold text-(--color-foreground)">
+              <div className="flex sm:flex-col items-center sm:items-end gap-2 sm:gap-1 shrink-0">
+                <span className="font-semibold text-sm text-(--color-foreground)">
                   {order.units} units
                 </span>
                 <span
-                  className={`text-xs px-2 py-1 rounded-md ${getStatusColor(
+                  className={`text-xs px-2 py-0.5 rounded-md whitespace-nowrap ${getStatusColor(
                     order.status
                   )}`}
                 >
