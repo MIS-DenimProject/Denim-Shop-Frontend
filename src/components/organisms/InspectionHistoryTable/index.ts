@@ -1,0 +1,1 @@
+export { InspectionHistoryTable } from "./InspectionHistoryTable";
