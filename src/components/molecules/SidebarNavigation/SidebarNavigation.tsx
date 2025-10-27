@@ -9,6 +9,7 @@ export const SidebarNavigation: FC<SidebarNavigationProps> = ({
   className,
   items = [],
   onNavigate,
+  isCollapsed = false,
 }) => {
   const [activeItem, setActiveItem] = useState(
     activeItemId || items[0]?.id || "dashboard"
@@ -20,14 +21,19 @@ export const SidebarNavigation: FC<SidebarNavigationProps> = ({
   };
 
   return (
-    <nav className={cn(`flex-1 overflow-y-auto py-4 px-3`, className)}>
-      <div className="space-y-1">
+    <nav className={cn(
+      `flex-1 py-4 transition-all duration-300 overflow-y-auto overflow-x-hidden`,
+      isCollapsed ? "px-2" : "px-3",
+      className
+    )}>
+      <div className="space-y-1.5">
         {items.map((item) => (
           <NavigationItem
             key={item.id}
             item={item}
             isActive={activeItem === item.id}
             onClick={() => handleItemClick(item.id)}
+            isCollapsed={isCollapsed}
           />
         ))}
       </div>

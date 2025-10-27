@@ -1,6 +1,6 @@
 import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts"
-import type { FC } from "react"
+import { Bar, BarChart, XAxis, YAxis } from "recharts"
+
 import {
   Card,
   CardContent,
@@ -16,7 +16,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
-export const description = "A bar chart with a label"
+export const description = "A horizontal bar chart"
 
 const chartData = [
   { month: "January", desktop: 186 },
@@ -30,15 +30,15 @@ const chartData = [
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "var(--denim-700)",
+    color: "var(--chart-1)",
   },
 } satisfies ChartConfig
 
-export const HorizontalBarChart: FC = () => {
+export function VerticalBarChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bar Chart - Horizontal</CardTitle>
+        <CardTitle>Bar Chart - Vertical</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>
@@ -46,13 +46,15 @@ export const HorizontalBarChart: FC = () => {
           <BarChart
             accessibilityLayer
             data={chartData}
+            layout="vertical"
             margin={{
-              top: 20,
+              left: -20,
             }}
           >
-            <CartesianGrid vertical={false} />
-            <XAxis
+            <XAxis type="number" dataKey="desktop" hide />
+            <YAxis
               dataKey="month"
+              type="category"
               tickLine={false}
               tickMargin={10}
               axisLine={false}
@@ -62,14 +64,7 @@ export const HorizontalBarChart: FC = () => {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
-              <LabelList
-                position="top"
-                offset={12}
-                className="fill-foreground"
-                fontSize={12}
-              />
-            </Bar>
+            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={5} />
           </BarChart>
         </ChartContainer>
       </CardContent>
