@@ -7,8 +7,10 @@ export interface UserAvatarProps {
   role?: string;
   avatarUrl?: string;
   className?: string;
+  isCollapsed?: boolean;
 }
 
 export interface LogoutButtonProps {
   onClick?: () => void;
+  isCollapsed?: boolean;
 }

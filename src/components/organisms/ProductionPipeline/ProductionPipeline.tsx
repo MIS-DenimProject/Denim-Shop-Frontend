@@ -1,29 +1,43 @@
 import type { FC } from "react";
-import { PipelineStageCard } from "@/components";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 
-interface PipelineData {
-  stage: "Cutting" | "Assembling" | "Sewing" | "Dyeing" | "Ironing/QC";
-  count: number;
-}
+const pipelineStages = [
+  { id: 1, name: "Cutting", units: 450, progress: 92 },
+  { id: 2, name: "Assembling", units: 380, progress: 88 },
+  { id: 3, name: "Sewing", units: 320, progress: 90 },
+  { id: 4, name: "Dyeing", units: 280, progress: 85 },
+  { id: 5, name: "Ironing/QC", units: 245, progress: 94 },
+];
 
-interface ProductionPipelineProps {
-  data: PipelineData[];
-}
-
-export const ProductionPipeline: FC<ProductionPipelineProps> = ({ data }) => {
+export const ProductionPipeline: FC = () => {
   return (
-    <div className="bg-white rounded-xl border border-neutral-200 shadow-sm p-8">
-      <h2 className="text-xl font-bold text-neutral-900 mb-6">Production Pipeline</h2>
-      <div className="flex items-center justify-between">
-        {data.map((item, index) => (
-          <PipelineStageCard 
-            key={item.stage}
-            stage={item.stage}
-            count={item.count}
-            showArrow={index < data.length - 1}
-          />
-        ))}
-      </div>
-    </div>
+    <Card className="w-full h-full shadow-sm hover:shadow-md transition-shadow duration-200">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-lg font-semibold text-(--color-foreground)">
+          Production Pipeline
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="pt-2">
+        <div className="space-y-4">
+          {pipelineStages.map((stage) => (
+            <div key={stage.id} className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-(--color-foreground)">
+                  {stage.name}
+                </span>
+                <span className="text-xs font-semibold text-(--color-muted-foreground)">
+                  {stage.units} units
+                </span>
+              </div>
+              <Progress 
+                value={stage.progress} 
+                className="h-2 bg-(--color-muted)"
+              />
+            </div>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
