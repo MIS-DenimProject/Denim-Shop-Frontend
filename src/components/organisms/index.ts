@@ -10,3 +10,11 @@ export * from './ReportKPIs'
 export * from './ReportCharts'
 export * from './StageEfficiency'
 export * from './ReportTabs'
+export * from './ProductionPipeline';
+export * from './ProductionTable';
+export * from './ProductionTimeline';
+export * from './StatsOverview';
+export * from './InspectionHistoryTable';
+export * from './DefectCategories';
+export * from './RecentFailedItems';
+export * from './QCChecklist';
