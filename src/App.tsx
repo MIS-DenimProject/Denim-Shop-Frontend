@@ -10,7 +10,20 @@ import {
 } from "@/components";
 
 function App() {
-  const [activePage, setActivePage] = useState<string>("dashboard");
+  const getInitialPage = () => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get('page');
+      if (page) return page;
+      // also support hash like #inventory
+      if (window.location.hash) return window.location.hash.replace('#', '');
+    } catch (e) {
+      // ignore in non-browser environments
+    }
+    return 'dashboard';
+  };
+
+  const [activePage, setActivePage] = useState<string>(getInitialPage());
   const [sidebarHidden, setSidebarHidden] = useState(false);
 
   const handleNavigate = (itemId: string) => {
