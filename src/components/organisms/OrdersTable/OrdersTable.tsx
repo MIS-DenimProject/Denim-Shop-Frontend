@@ -1,5 +1,4 @@
 import { Eye, MoreVertical, MapPin } from "lucide-react";
-import { StatusBadge } from "@/components/atoms/StatusBadge";
 
 interface Order {
   id: string;
@@ -115,7 +114,7 @@ export const OrdersTable = () => {
             {orders.map((order) => (
               <tr key={order.id} className="border-b border-(--neutral-200) hover:bg-(--neutral-50)">
                 <td className="px-6 py-4">
-                  <span className="text-[var(--denim-600)] font-medium">{order.id}</span>
+                  <span className="text-(--denim-600) font-medium">{order.id}</span>
                 </td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
