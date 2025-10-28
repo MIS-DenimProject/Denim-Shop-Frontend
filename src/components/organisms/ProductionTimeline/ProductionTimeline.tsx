@@ -36,10 +36,10 @@ export const ProductionTimeline: FC<ProductionTimelineProps> = ({ items }) => {
                   <span className="text-neutral-600 ml-2">{item.quantity} units - {item.style}</span>
                 </div>
                 <div className={`px-4 py-1.5 rounded-full text-sm font-semibold ${
-                  item.progress >= 75 ? 'bg-green-600 text-white' :
-                  item.progress >= 50 ? 'bg-blue-600 text-white' :
-                  item.progress >= 25 ? 'bg-yellow-600 text-white' :
-                  'bg-neutral-600 text-white'
+                  item.progress >= 75 ? 'bg-neutral-800 text-white' :
+                  item.progress >= 50 ? 'bg-neutral-600 text-white' :
+                    item.progress >= 25 ? 'bg-neutral-400 text-white' :
+                  'bg-neutral-200 text-white'
                 }`}>
                   {item.progress}% Complete
                 </div>

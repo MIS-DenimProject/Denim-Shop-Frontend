@@ -56,7 +56,7 @@ export const ProductionItemRow: FC<ProductionItemRowProps> = ({
   return (
     <tr className="border-b border-neutral-200 hover:bg-neutral-50 transition-colors duration-200 group">
       <td className="px-6 py-4">
-        <a href="#" className="text-blue-600 hover:text-blue-800 font-medium">
+        <a href="#" className="text-denim-600 hover:text-denim-800 font-medium">
           {orderId}
         </a>
       </td>
@@ -109,7 +109,7 @@ export const ProductionItemRow: FC<ProductionItemRowProps> = ({
           <select
             value={editData.assignedTo}
             onChange={(e) => setEditData({ ...editData, assignedTo: e.target.value })}
-            className="px-3 py-1 border-2 border-purple-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="px-3 py-1 border-2 border-denim-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-denim-500"
           >
             {teams.map((team) => (
               <option key={team} value={team}>{team}</option>
@@ -127,7 +127,7 @@ export const ProductionItemRow: FC<ProductionItemRowProps> = ({
             type="date"
             value={editData.estCompletion}
             onChange={(e) => setEditData({ ...editData, estCompletion: e.target.value })}
-            className="px-3 py-1 border-2 border-emerald-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="px-3 py-1 border-2 border-denim-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-denim-500"
           />
         ) : (
           <span className="text-neutral-700">{estCompletion}</span>
@@ -140,7 +140,7 @@ export const ProductionItemRow: FC<ProductionItemRowProps> = ({
           <select
             value={editData.status}
             onChange={(e) => setEditData({ ...editData, status: e.target.value as "info" | "warning" })}
-            className="px-3 py-1 border-2 border-blue-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-1 border-2 border-denim-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-denim-500"
           >
             <option value="info">On Track</option>
             <option value="warning">Needs Attention</option>
@@ -165,14 +165,14 @@ export const ProductionItemRow: FC<ProductionItemRowProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={handleSave}
-              className="p-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
+              className="p-2 bg-neutral-700 text-white rounded-lg hover:bg-neutral-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
               title="Save changes"
             >
               <Check className="w-5 h-5" />
             </button>
             <button
               onClick={handleCancel}
-              className="p-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
+              className="p-2 bg-neutral-700 text-white rounded-lg hover:bg-neutral-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
               title="Cancel editing"
             >
               <X className="w-5 h-5" />
@@ -181,7 +181,7 @@ export const ProductionItemRow: FC<ProductionItemRowProps> = ({
         ) : (
           <button
             onClick={() => setIsEditing(true)}
-            className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
+              className="p-2 bg-denim-600 text-neutral-900 rounded-lg hover:bg-denim-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
             title="Edit order"
           >
             <Edit2 className="w-5 h-5" />

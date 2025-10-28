@@ -147,7 +147,7 @@ export const QualityControlTemplate = () => {
         </div>
         <button 
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-6 py-3.5 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
+          className="flex items-center gap-2 px-6 py-3.5 bg-denim-600 text-black border-1 rounded-lg font-bold hover:bg-denim-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
         >
           <Plus className="w-5 h-5 font-bold" />
           New Inspection

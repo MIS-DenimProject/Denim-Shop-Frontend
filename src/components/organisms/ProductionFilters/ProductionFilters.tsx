@@ -33,7 +33,7 @@ export const ProductionFilters: FC<ProductionFiltersProps> = ({
           {/* Stage Filter */}
           <div className="relative">
             <select
-              className="appearance-none pl-10 pr-10 py-3 border-2 border-denim-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-denim-500 focus:border-denim-500 font-semibold text-neutral-800 bg-white cursor-pointer hover:border-denim-400 hover:bg-denim-50 transition-all duration-200 shadow-sm"
+              className="appearance-none pl-10 pr-10 py-3 border-1 border-denim-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-denim-500 focus:border-denim-500 font-semibold text-neutral-800 bg-white cursor-pointer hover:border-denim-400 hover:bg-denim-50 transition-all duration-200 shadow-sm"
               onChange={(e) => onStageFilter?.(e.target.value)}
             >
               <option value="">All Stages</option>
@@ -49,7 +49,7 @@ export const ProductionFilters: FC<ProductionFiltersProps> = ({
           {/* Status Filter */}
           <div className="relative">
             <select
-              className="appearance-none pl-10 pr-10 py-3 border-2 border-purple-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 font-semibold text-neutral-800 bg-white cursor-pointer hover:border-purple-400 hover:bg-purple-50 transition-all duration-200 shadow-sm"
+              className="appearance-none pl-10 pr-10 py-3 border-1 border-denim-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-denim-500 focus:border-denim-500 font-semibold text-neutral-800 bg-white cursor-pointer hover:border-denim-400 hover:bg-denim-50 transition-all duration-200 shadow-sm"
               onChange={(e) => onStatusFilter?.(e.target.value)}
             >
               <option value="">All Status</option>
@@ -57,11 +57,11 @@ export const ProductionFilters: FC<ProductionFiltersProps> = ({
               <option value="delayed">Delayed</option>
               <option value="completed">Completed</option>
             </select>
-            <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-600 pointer-events-none" />
+            <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-denim-600 pointer-events-none" />
           </div>
 
           {/* Export Button */}
-          <button className="flex items-center gap-2 px-5 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+          <button className="flex items-center gap-2 px-5 py-3 bg-neutral-900 text-white rounded-lg font-semibold hover:bg-neutral-800 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
             <Download className="w-5 h-5" />
             Export
           </button>

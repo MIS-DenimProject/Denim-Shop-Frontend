@@ -62,7 +62,7 @@ export const InspectionRow: FC<InspectionRowProps> = ({
   return (
     <tr className="border-b border-neutral-200 hover:bg-neutral-50 transition-colors duration-200 group">
       <td className="px-6 py-4">
-        <a href="#" className="text-blue-600 hover:text-blue-800 font-semibold">
+        <a href="#" className="text-denim-600 hover:text-denim-800 font-semibold">
           {batchId}
         </a>
       </td>
@@ -77,7 +77,7 @@ export const InspectionRow: FC<InspectionRowProps> = ({
             min="0"
             value={editData.inspected}
             onChange={(e) => setEditData({ ...editData, inspected: Number(e.target.value) })}
-            className="w-20 px-2 py-1 border-2 border-purple-400 rounded text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-20 px-2 py-1 border-2 border-denim-400 rounded text-sm font-medium focus:outline-none focus:ring-2 focus:ring-denim-500"
           />
         ) : (
           <span className="text-neutral-700">{inspected}</span>
@@ -92,7 +92,7 @@ export const InspectionRow: FC<InspectionRowProps> = ({
             min="0"
             value={editData.passed}
             onChange={(e) => setEditData({ ...editData, passed: Number(e.target.value) })}
-            className="w-20 px-2 py-1 border-2 border-emerald-400 rounded text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 text-green-600"
+            className="w-20 px-2 py-1 border-2 border-denim-400 rounded text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-denim-500 text-green-600"
           />
         ) : (
           <span className="text-green-600 font-semibold">{passed}</span>
@@ -107,7 +107,7 @@ export const InspectionRow: FC<InspectionRowProps> = ({
             min="0"
             value={editData.failed}
             onChange={(e) => setEditData({ ...editData, failed: Number(e.target.value) })}
-            className="w-20 px-2 py-1 border-2 border-rose-400 rounded text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-rose-500 text-red-600"
+            className="w-20 px-2 py-1 border-2 border-denim-400 rounded text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-denim-500 text-red-600"
           />
         ) : (
           <span className="text-red-600 font-semibold">{failed}</span>
@@ -136,7 +136,7 @@ export const InspectionRow: FC<InspectionRowProps> = ({
           <select
             value={editData.inspector}
             onChange={(e) => setEditData({ ...editData, inspector: e.target.value })}
-            className="px-3 py-1 border-2 border-blue-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-1 border-2 border-denim-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-denim-500"
           >
             {inspectors.map((insp) => (
               <option key={insp} value={insp}>{insp}</option>
@@ -154,7 +154,7 @@ export const InspectionRow: FC<InspectionRowProps> = ({
             type="date"
             value={editData.date}
             onChange={(e) => setEditData({ ...editData, date: e.target.value })}
-            className="px-3 py-1 border-2 border-indigo-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="px-3 py-1 border-2 border-denim-400 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-denim-500"
           />
         ) : (
           <span className="text-neutral-700">{date}</span>
@@ -167,7 +167,7 @@ export const InspectionRow: FC<InspectionRowProps> = ({
           <select
             value={editData.status}
             onChange={(e) => setEditData({ ...editData, status: e.target.value as "Completed" | "In Progress" })}
-            className="px-3 py-1 border-2 border-purple-400 rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="px-3 py-1 border-2 border-denim-400 rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-denim-500"
           >
             <option value="Completed">Completed</option>
             <option value="In Progress">In Progress</option>
@@ -198,14 +198,14 @@ export const InspectionRow: FC<InspectionRowProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={handleSave}
-              className="p-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
+              className="p-2 bg-neutral-700 text-white rounded-lg hover:bg-neutral-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
               title="Save changes"
             >
               <Check className="w-5 h-5" />
             </button>
             <button
               onClick={handleCancel}
-              className="p-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
+              className="p-2 bg-neutral-700 text-white rounded-lg hover:bg-neutral-600 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
               title="Cancel editing"
             >
               <X className="w-5 h-5" />
@@ -214,7 +214,7 @@ export const InspectionRow: FC<InspectionRowProps> = ({
         ) : (
           <button
             onClick={() => setIsEditing(true)}
-            className="p-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
+              className="p-2 bg-denim-600 text-neutral-900 rounded-lg hover:bg-denim-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-110"
             title="Edit inspection"
           >
             <Edit2 className="w-5 h-5" />
