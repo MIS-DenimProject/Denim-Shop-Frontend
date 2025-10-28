@@ -20,7 +20,7 @@ export const StatsOverview: FC<StatsOverviewProps> = ({
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       <div className="relative">
-        <div className="absolute -top-2 -left-2 w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+        <div className="absolute -top-2 -left-2 w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center border-2 border-blue-200 shadow-sm">
           <ClipboardList className="w-5 h-5 text-blue-600" />
         </div>
         <StatCard
@@ -31,7 +31,7 @@ export const StatsOverview: FC<StatsOverviewProps> = ({
       </div>
       
       <div className="relative">
-        <div className="absolute -top-2 -left-2 w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+        <div className="absolute -top-2 -left-2 w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center border-2 border-green-200 shadow-sm">
           <CheckCircle2 className="w-5 h-5 text-green-600" />
         </div>
         <StatCard
@@ -44,7 +44,7 @@ export const StatsOverview: FC<StatsOverviewProps> = ({
       </div>
       
       <div className="relative">
-        <div className="absolute -top-2 -left-2 w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+        <div className="absolute -top-2 -left-2 w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center border-2 border-red-200 shadow-sm">
           <XCircle className="w-5 h-5 text-red-600" />
         </div>
         <StatCard
@@ -56,7 +56,7 @@ export const StatsOverview: FC<StatsOverviewProps> = ({
       </div>
       
       <div className="relative">
-        <div className="absolute -top-2 -left-2 w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+        <div className="absolute -top-2 -left-2 w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center border-2 border-yellow-200 shadow-sm">
           <AlertCircle className="w-5 h-5 text-yellow-600" />
         </div>
         <StatCard

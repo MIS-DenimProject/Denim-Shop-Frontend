@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { InspectionRow } from "@/components";
+import { Info } from "lucide-react";
 
 interface InspectionData {
   batchId: string;
@@ -17,11 +18,20 @@ interface InspectionData {
 
 interface InspectionHistoryTableProps {
   inspections: InspectionData[];
+  onUpdateInspection?: (batchId: string, updates: Partial<InspectionData>) => void;
 }
 
-export const InspectionHistoryTable: FC<InspectionHistoryTableProps> = ({ inspections }) => {
+export const InspectionHistoryTable: FC<InspectionHistoryTableProps> = ({ inspections, onUpdateInspection }) => {
   return (
     <div className="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
+      {/* Info Banner */}
+      <div className="px-6 py-3 bg-purple-50 border-b border-purple-200 flex items-center gap-3">
+        <Info className="w-5 h-5 text-purple-600 shrink-0" />
+        <p className="text-sm text-purple-800">
+          <span className="font-semibold">Interactive Table:</span> Click the <span className="font-semibold">edit button</span> to modify inspections, or <span className="font-semibold">click status badges</span> to toggle status
+        </p>
+      </div>
+      
       <div className="px-8 py-6 border-b border-neutral-200">
         <h2 className="text-xl font-bold text-neutral-900">Inspection History</h2>
       </div>
@@ -59,11 +69,14 @@ export const InspectionHistoryTable: FC<InspectionHistoryTableProps> = ({ inspec
               <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-700 uppercase tracking-wider">
                 Status
               </th>
+              <th className="px-6 py-4 text-left text-xs font-semibold text-neutral-700 uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-neutral-200">
             {inspections.map((inspection) => (
-              <InspectionRow key={inspection.batchId} {...inspection} />
+              <InspectionRow key={inspection.batchId} {...inspection} onUpdate={onUpdateInspection} />
             ))}
           </tbody>
         </table>

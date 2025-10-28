@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import { Info, Clock } from "lucide-react";
 
 interface StatusBadgeProps {
   type: "info" | "warning";
@@ -8,20 +7,22 @@ interface StatusBadgeProps {
 export const StatusBadge: FC<StatusBadgeProps> = ({ type }) => {
   const config = {
     info: {
-      icon: Info,
-      className: "text-blue-500"
+      text: "Completed",
+      bgColor: "bg-neutral-900",
+      textColor: "text-white"
     },
     warning: {
-      icon: Clock,
-      className: "text-yellow-500"
+      text: "In Progress",
+      bgColor: "bg-neutral-200",
+      textColor: "text-neutral-800"
     }
   };
 
-  const Icon = config[type].icon;
+  const badge = config[type];
 
   return (
-    <div className={`${config[type].className}`}>
-      <Icon className="w-5 h-5" />
-    </div>
+    <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold ${badge.bgColor} ${badge.textColor}`}>
+      {badge.text}
+    </span>
   );
 };
