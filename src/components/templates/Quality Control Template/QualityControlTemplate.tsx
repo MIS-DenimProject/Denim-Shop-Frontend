@@ -6,6 +6,7 @@ import {
   RecentFailedItems,
   QCChecklist
 } from "@/components";
+import QCList from '@/components/molecules/QCList/QCList';
 
 export const QualityControlTemplate = () => {
   const statsData = {
@@ -125,6 +126,10 @@ export const QualityControlTemplate = () => {
       </div>
 
       <QCChecklist items={checklistItems} />
+      {/* Light-weight frontend-only QC list and quick create */}
+      <div>
+        <QCList />
+      </div>
     </div>
   );
 };
