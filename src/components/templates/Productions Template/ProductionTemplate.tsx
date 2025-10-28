@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus } from "lucide-react";
+
 import { 
   ProductionPipeline, 
   ProductionTable, 
@@ -8,6 +8,7 @@ import {
   ProductionFilters,
   AddOrderModal,
   Toast
+  
 } from "@/components";
 
 export const ProductionTemplate = () => {
@@ -230,13 +231,7 @@ export const ProductionTemplate = () => {
             <p className="text-sm text-neutral-600 mt-1">{getCurrentDate()}</p>
           </div>
         </div>
-        <button 
-          onClick={() => setIsModalOpen(true)}
-          className="flex items-center gap-2 px-6 py-3.5 bg-denim-600 text-black rounded-lg font-bold hover:bg-denim-700 border-1 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
-        >
-          <Plus className="w-5 h-5 font-bold" />
-          Add New Order
-        </button>
+        
       </div>
 
       {/* Production Statistics */}
@@ -246,7 +241,7 @@ export const ProductionTemplate = () => {
       <ProductionFilters />
 
       {/* Production Pipeline Section */}
-      <ProductionPipelineT data={pipelineData} />
+      <ProductionPipeline data={pipelineData} />
 
       {/* Production Items Table Section */}
       <ProductionTable items={productionItems} onUpdateItem={handleUpdateItem} />

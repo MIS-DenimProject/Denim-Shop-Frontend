@@ -8,7 +8,6 @@ import {
   QCChecklist,
   InspectionModal
 } from "@/components";
-import QCList from '@/components/molecules/QCList/QCList';
 
 export const QualityControlTemplate = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
