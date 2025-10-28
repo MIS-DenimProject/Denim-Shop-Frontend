@@ -12,12 +12,15 @@ export interface SidebarProps {
   onLogout?: () => void;
   activeItemId?: string;
   className?: string;
+  defaultCollapsed?: boolean;
+  onCollapsedChange?: (collapsed: boolean) => void;
 }
 
 export interface SidebarLogoProps {
   companyName?: string;
   subtitle?: string;
   className?: string;
+  isCollapsed?: boolean;
 }
 
 export interface SidebarFooterProps {
@@ -26,6 +29,7 @@ export interface SidebarFooterProps {
   userAvatar?: string;
   onLogout?: () => void;
   className?: string;
+  isCollapsed?: boolean;
 }
 
 export interface SidebarNavigationProps {
@@ -33,4 +37,5 @@ export interface SidebarNavigationProps {
   onNavigate?: (itemId: string) => void;
   activeItemId?: string;
   className?: string;
+  isCollapsed?: boolean;
 }

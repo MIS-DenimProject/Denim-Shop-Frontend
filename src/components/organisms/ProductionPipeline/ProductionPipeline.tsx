@@ -1,10 +1,14 @@
 import type { FC } from "react";
-import { PipelineStageCard } from "@/components";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 
-interface PipelineData {
-  stage: "Cutting" | "Assembling" | "Sewing" | "Dyeing" | "Ironing/QC";
-  count: number;
-}
+const pipelineStages = [
+  { id: 1, name: "Cutting", units: 450, progress: 92 },
+  { id: 2, name: "Assembling", units: 380, progress: 88 },
+  { id: 3, name: "Sewing", units: 320, progress: 90 },
+  { id: 4, name: "Dyeing", units: 280, progress: 85 },
+  { id: 5, name: "Ironing/QC", units: 245, progress: 94 },
+];
 
 interface ProductionPipelineProps {
   data: PipelineData[];

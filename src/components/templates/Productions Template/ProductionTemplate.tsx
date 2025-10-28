@@ -246,7 +246,7 @@ export const ProductionTemplate = () => {
       <ProductionFilters />
 
       {/* Production Pipeline Section */}
-      <ProductionPipeline data={pipelineData} />
+      <ProductionPipelineT data={pipelineData} />
 
       {/* Production Items Table Section */}
       <ProductionTable items={productionItems} onUpdateItem={handleUpdateItem} />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   DashboardPage,
   Sidebar,
@@ -10,7 +10,21 @@ import {
 } from "@/components";
 
 function App() {
-  const [activePage, setActivePage] = useState<string>("dashboard");
+  const getInitialPage = () => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get('page');
+      if (page) return page;
+      // also support hash like #inventory
+      if (window.location.hash) return window.location.hash.replace('#', '');
+    } catch (e) {
+      // ignore in non-browser environments
+    }
+    return 'dashboard';
+  };
+
+  const [activePage, setActivePage] = useState<string>(getInitialPage());
+  const [sidebarHidden, setSidebarHidden] = useState(false);
 
   const handleNavigate = (itemId: string) => {
     setActivePage(itemId);
@@ -20,6 +34,19 @@ function App() {
     console.log("Logging out...");
     // Add your logout logic here
   };
+
+  // Listen to sidebar state changes
+  useEffect(() => {
+    const handleSidebarState = (event: CustomEvent) => {
+      const { isCollapsed } = event.detail;
+      setSidebarHidden(isCollapsed);
+    };
+
+    window.addEventListener('sidebar-state-change', handleSidebarState as EventListener);
+    return () => {
+      window.removeEventListener('sidebar-state-change', handleSidebarState as EventListener);
+    };
+  }, []);
 
     const renderContent = () => {
     switch (activePage) {
@@ -39,7 +66,7 @@ function App() {
     }
   };
   return (
-    <div className="flex h-screen bg-[hsl(var(--color-gray-50))]">
+    <div className="flex h-screen bg-[hsl(var(--color-gray-50))] overflow-hidden">
       <Sidebar
         userName="John Doe"
         userRole="System Administrator"
@@ -48,8 +75,14 @@ function App() {
         activeItemId={activePage}
       />
 
-      {/* Main Content Area */}
-      <main className="flex-1 overflow-auto">{renderContent()}</main>
+      {/* Main Content Area with conditional padding for hamburger menu */}
+      <main 
+        className={`flex-1 overflow-y-auto overflow-x-hidden transition-all duration-300 ${
+          sidebarHidden ? 'pl-0' : 'pl-0'
+        }`}
+      >
+        {renderContent()}
+      </main>
     </div>
   );
 }

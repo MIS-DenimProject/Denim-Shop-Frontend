@@ -13,4 +13,5 @@ export interface NavigationItemProps {
   item: NavItem;
   isActive: boolean;
   onClick: () => void;
+  isCollapsed?: boolean;
 }
