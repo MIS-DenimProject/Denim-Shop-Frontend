@@ -1,4 +1,5 @@
 import { Package } from "lucide-react";
+import InventoryList from '@/components/molecules/InventoryList/InventoryList';
 
 export const InventoryTemplate = () => {
   return (
@@ -15,6 +16,26 @@ export const InventoryTemplate = () => {
           <p className="text-sm text-[hsl(var(--color-gray-500))]">
             Stock management and tracking
           </p>
+        </div>
+      </div>
+
+      {/* Top controls: search, filters, add item */}
+      <div className="flex items-center justify-between gap-4 mb-6">
+        <div className="flex-1">
+          <input
+            placeholder="Search inventory items..."
+            className="w-full rounded-md border px-4 py-3 bg-white text-sm shadow-sm"
+          />
+        </div>
+
+        <div className="flex items-center gap-3">
+          <select aria-label="Filter categories" className="rounded-md border px-3 py-2 text-sm bg-white">
+            <option>All Categories</option>
+            <option>Raw Material</option>
+            <option>Hardware</option>
+            <option>Finished Goods</option>
+          </select>
+          <button className="px-4 py-2 bg-neutral-900 text-white rounded-md">+ Add Item</button>
         </div>
       </div>
 
@@ -61,97 +82,9 @@ export const InventoryTemplate = () => {
           </h2>
         </div>
         <div className="p-6">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="text-left border-b border-[hsl(var(--color-gray-200))]">
-                  <th className="pb-3 text-sm font-medium text-[hsl(var(--color-gray-500))]">
-                    Item Code
-                  </th>
-                  <th className="pb-3 text-sm font-medium text-[hsl(var(--color-gray-500))]">
-                    Material
-                  </th>
-                  <th className="pb-3 text-sm font-medium text-[hsl(var(--color-gray-500))]">
-                    Quantity
-                  </th>
-                  <th className="pb-3 text-sm font-medium text-[hsl(var(--color-gray-500))]">
-                    Unit
-                  </th>
-                  <th className="pb-3 text-sm font-medium text-[hsl(var(--color-gray-500))]">
-                    Status
-                  </th>
-                  <th className="pb-3 text-sm font-medium text-[hsl(var(--color-gray-500))]">
-                    Location
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-[hsl(var(--color-gray-100))]">
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-900))]">
-                    DEN-001
-                  </td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-900))]">
-                    Raw Denim Fabric
-                  </td>
-                  <td className="py-3 text-sm font-medium text-[hsl(var(--color-gray-900))]">
-                    2,340
-                  </td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-700))]">
-                    Yards
-                  </td>
-                  <td className="py-3">
-                    <span className="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
-                      In Stock
-                    </span>
-                  </td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-700))]">
-                    Warehouse A
-                  </td>
-                </tr>
-                <tr className="border-b border-[hsl(var(--color-gray-100))]">
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-900))]">
-                    BTN-045
-                  </td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-900))]">
-                    Metal Buttons
-                  </td>
-                  <td className="py-3 text-sm font-medium text-yellow-600">
-                    150
-                  </td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-700))]">
-                    Pieces
-                  </td>
-                  <td className="py-3">
-                    <span className="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
-                      Low Stock
-                    </span>
-                  </td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-700))]">
-                    Warehouse B
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-900))]">
-                    THR-089
-                  </td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-900))]">
-                    Sewing Thread
-                  </td>
-                  <td className="py-3 text-sm font-medium text-red-600">0</td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-700))]">
-                    Spools
-                  </td>
-                  <td className="py-3">
-                    <span className="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">
-                      Out of Stock
-                    </span>
-                  </td>
-                  <td className="py-3 text-sm text-[hsl(var(--color-gray-700))]">
-                    Warehouse A
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div>
+            {/* Dynamic inventory list (frontend-only mock) */}
+            <InventoryList />
           </div>
         </div>
       </div>
