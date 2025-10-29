@@ -1,25 +1,39 @@
-import { Factory } from "lucide-react";
-import { ProductionPipelineT, ProductionTable, ProductionTimeline } from "@/components";
+import { useState } from "react";
+
+import { 
+  ProductionPipeline, 
+  ProductionTable, 
+  ProductionTimeline,
+  ProductionStats,
+  ProductionFilters,
+  AddOrderModal,
+  Toast
+  
+} from "@/components";
 
 export const ProductionTemplate = () => {
-  // Pipeline data
-  const pipelineData = [
-    { stage: "Cutting" as const, count: 450 },
-    { stage: "Assembling" as const, count: 380 },
-    { stage: "Sewing" as const, count: 320 },
-    { stage: "Dyeing" as const, count: 280 },
-    { stage: "Ironing/QC" as const, count: 245 }
-  ];
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Production items data
-  const productionItems = [
+  // Get current date dynamically
+  const getCurrentDate = () => {
+    const today = new Date();
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    };
+    return today.toLocaleDateString('en-US', options);
+  };
+  const [productionItems, setProductionItems] = useState([
     {
       orderId: "ORD-1024",
       style: "Slim Fit Blue",
       quantity: "500 units",
       currentStage: "Sewing",
       progress: 60,
-      assignedTo: "Team A - Sewing",
+      assignedTo: "Team C - Sewing",
       estCompletion: "11/2/2025",
       status: "info" as const
     },
@@ -29,7 +43,7 @@ export const ProductionTemplate = () => {
       quantity: "350 units",
       currentStage: "Dyeing",
       progress: 75,
-      assignedTo: "Team B - Dyeing",
+      assignedTo: "Team D - Dyeing",
       estCompletion: "10/30/2025",
       status: "info" as const
     },
@@ -37,9 +51,9 @@ export const ProductionTemplate = () => {
       orderId: "ORD-1025",
       style: "Bootcut Indigo",
       quantity: "300 units",
-      currentStage: "Cutting",
+      currentStage: "Assembling",
       progress: 30,
-      assignedTo: "Team C - Cutting",
+      assignedTo: "Team B - Assembly",
       estCompletion: "11/5/2025",
       status: "warning" as const
     },
@@ -47,12 +61,81 @@ export const ProductionTemplate = () => {
       orderId: "ORD-1026",
       style: "Straight Fit Dark",
       quantity: "450 units",
-      currentStage: "Assembling",
+      currentStage: "Cutting",
+      progress: 15,
+      assignedTo: "Team A - Cutting",
+      estCompletion: "11/8/2025",
+      status: "info" as const
+    },
+    {
+      orderId: "ORD-1027",
+      style: "Relaxed Fit Light",
+      quantity: "280 units",
+      currentStage: "Ironing/QC",
+      progress: 90,
+      assignedTo: "Team E - QC",
+      estCompletion: "10/29/2025",
+      status: "info" as const
+    },
+    {
+      orderId: "ORD-1028",
+      style: "Skinny Fit Black",
+      quantity: "520 units",
+      currentStage: "Sewing",
       progress: 45,
-      assignedTo: "Team D - Assembly",
+      assignedTo: "Team C - Sewing",
       estCompletion: "11/4/2025",
       status: "warning" as const
+    },
+    {
+      orderId: "ORD-1029",
+      style: "Bootcut Dark Wash",
+      quantity: "390 units",
+      currentStage: "Cutting",
+      progress: 25,
+      assignedTo: "Team A - Cutting",
+      estCompletion: "11/6/2025",
+      status: "warning" as const
+    },
+    {
+      orderId: "ORD-1030",
+      style: "Regular Fit Blue",
+      quantity: "420 units",
+      currentStage: "Dyeing",
+      progress: 70,
+      assignedTo: "Team D - Dyeing",
+      estCompletion: "11/1/2025",
+      status: "info" as const
     }
+  ]);
+
+  // Handler for updating production items
+  const handleUpdateItem = (orderId: string, updates: Partial<typeof productionItems[0]>) => {
+    setProductionItems(prevItems =>
+      prevItems.map(item =>
+        item.orderId === orderId ? { ...item, ...updates } : item
+      )
+    );
+    setToastMessage(`Order ${orderId} updated successfully!`);
+    console.log(`Updated ${orderId}:`, updates);
+  };
+
+  // Statistics data
+  const statsData = {
+    totalOrders: 12,
+    activeOrders: 8,
+    completedToday: 2,
+    pendingOrders: 2,
+    delayedOrders: 2
+  };
+
+  // Pipeline data
+  const pipelineData = [
+    { stage: "Cutting" as const, count: 450 },
+    { stage: "Assembling" as const, count: 380 },
+    { stage: "Sewing" as const, count: 320 },
+    { stage: "Dyeing" as const, count: 280 },
+    { stage: "Ironing/QC" as const, count: 245 }
   ];
 
   // Timeline data
@@ -108,30 +191,75 @@ export const ProductionTemplate = () => {
         { stage: "Dyeing" as const, isCompleted: false, isActive: false },
         { stage: "Ironing/QC" as const, isCompleted: false, isActive: false }
       ]
+    },
+    {
+      orderId: "ORD-1027",
+      quantity: 400,
+      style: "Relaxed Fit Light",
+      progress: 90,
+      stages: [
+        { stage: "Cutting" as const, isCompleted: true, isActive: false },
+        { stage: "Assembling" as const, isCompleted: true, isActive: false },
+        { stage: "Sewing" as const, isCompleted: true, isActive: false },
+        { stage: "Dyeing" as const, isCompleted: true, isActive: false },
+        { stage: "Ironing/QC" as const, isCompleted: false, isActive: true }
+      ]
+    },
+    {
+      orderId: "ORD-1028",
+      quantity: 550,
+      style: "Skinny Fit Black",
+      progress: 55,
+      stages: [
+        { stage: "Cutting" as const, isCompleted: true, isActive: false },
+        { stage: "Assembling" as const, isCompleted: true, isActive: false },
+        { stage: "Sewing" as const, isCompleted: false, isActive: true },
+        { stage: "Dyeing" as const, isCompleted: false, isActive: false },
+        { stage: "Ironing/QC" as const, isCompleted: false, isActive: false }
+      ]
     }
   ];
 
   return (
-    <div className="max-w-[1400px] mx-auto space-y-8">
+    <div className="max-w-[1600px] mx-auto space-y-6">
       {/* Page Header */}
-      <div className="flex items-center gap-4">
-        <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-linear-to-br from-denim-600 to-denim-500 text-white shadow-lg">
-          <Factory className="w-7 h-7" />
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          
+          <div>
+            <h1 className="text-3xl font-bold text-neutral-900">Production Management</h1>
+            <p className="text-sm text-neutral-600 mt-1">{getCurrentDate()}</p>
+          </div>
         </div>
-        <div>
-          <h1 className="text-3xl font-bold text-neutral-900">Production</h1>
-          <p className="text-sm text-neutral-600 mt-1">Monday, October 27, 2025</p>
-        </div>
+        
       </div>
 
+      {/* Production Statistics */}
+      <ProductionStats {...statsData} />
+
+      {/* Filters */}
+      <ProductionFilters />
+
       {/* Production Pipeline Section */}
-      <ProductionPipelineT data={pipelineData} />
+      <ProductionPipeline data={pipelineData} />
 
       {/* Production Items Table Section */}
-      <ProductionTable items={productionItems} />
+      <ProductionTable items={productionItems} onUpdateItem={handleUpdateItem} />
 
       {/* Production Timeline Section */}
       <ProductionTimeline items={timelineItems} />
+
+      {/* Add Order Modal */}
+      <AddOrderModal open={isModalOpen} onOpenChange={setIsModalOpen} />
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <Toast
+          message={toastMessage}
+          type="success"
+          onClose={() => setToastMessage(null)}
+        />
+      )}
     </div>
   );
 };

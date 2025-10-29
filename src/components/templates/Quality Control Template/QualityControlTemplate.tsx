@@ -1,23 +1,42 @@
-﻿import { ClipboardCheck, Plus } from "lucide-react";
+﻿import { useState } from "react";
+import { Plus } from "lucide-react";
 import { 
   StatsOverview, 
   InspectionHistoryTable, 
   DefectCategories, 
   RecentFailedItems,
-  QCChecklist
+  QCChecklist,
+  InspectionModal
 } from "@/components";
-import QCList from '@/components/molecules/QCList/QCList';
 
 export const QualityControlTemplate = () => {
-  const statsData = {
-    totalInspected: 1100,
-    passRate: 95.0,
-    failedUnits: 55,
-    activeInspections: 1,
-    passedUnits: 1045
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Get current date dynamically
+  const getCurrentDate = () => {
+    const today = new Date();
+    const options: Intl.DateTimeFormatOptions = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    };
+    return today.toLocaleDateString('en-US', options);
   };
 
-  const inspections = [
+  const [inspections, setInspections] = useState<Array<{
+    batchId: string;
+    orderId: string;
+    totalQty: number;
+    inspected: number;
+    passed: number;
+    failed: number;
+    passRate: number;
+    inspector: string;
+    date: string;
+    status: "Completed" | "In Progress";
+    trend?: "up" | "down";
+  }>>([
     {
       batchId: "BATCH-2025-145",
       orderId: "ORD-1024",
@@ -28,8 +47,8 @@ export const QualityControlTemplate = () => {
       passRate: 94.4,
       inspector: "John Smith",
       date: "10/24/2025",
-      status: "Completed" as const,
-      trend: "down" as const
+      status: "Completed",
+      trend: "down"
     },
     {
       batchId: "BATCH-2025-144",
@@ -41,8 +60,8 @@ export const QualityControlTemplate = () => {
       passRate: 95.7,
       inspector: "Sarah Johnson",
       date: "10/23/2025",
-      status: "Completed" as const,
-      trend: "up" as const
+      status: "Completed",
+      trend: "up"
     },
     {
       batchId: "BATCH-2025-146",
@@ -54,10 +73,28 @@ export const QualityControlTemplate = () => {
       passRate: 95.2,
       inspector: "Mike Davis",
       date: "10/24/2025",
-      status: "In Progress" as const,
-      trend: "up" as const
+      status: "In Progress",
+      trend: "up"
     }
-  ];
+  ]);
+
+  // Handler for updating inspections
+  const handleUpdateInspection = (batchId: string, updates: Partial<typeof inspections[0]>) => {
+    setInspections(prevInspections =>
+      prevInspections.map(inspection =>
+        inspection.batchId === batchId ? { ...inspection, ...updates } : inspection
+      )
+    );
+    console.log(`Updated ${batchId}:`, updates);
+  };
+
+  const statsData = {
+    totalInspected: 1100,
+    passRate: 95.0,
+    failedUnits: 55,
+    activeInspections: 1,
+    passedUnits: 1045
+  };
 
   const defectCategories = [
     { label: "Stitching Issue", count: 1 },
@@ -102,23 +139,24 @@ export const QualityControlTemplate = () => {
     <div className="max-w-[1400px] mx-auto space-y-8">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="flex items-center justify-center w-14 h-14 rounded-xl bg-linear-to-br from-denim-600 to-denim-500 text-white shadow-lg">
-            <ClipboardCheck className="w-7 h-7" />
-          </div>
+         
           <div>
             <h1 className="text-3xl font-bold text-neutral-900">Quality Control</h1>
-            <p className="text-sm text-neutral-600 mt-1">Monday, October 27, 2025</p>
+            <p className="text-sm text-neutral-600 mt-1">{getCurrentDate()}</p>
           </div>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-lg font-semibold hover:bg-neutral-800 transition-colors duration-200 shadow-md">
-          <Plus className="w-5 h-5" />
+        <button 
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center gap-2 px-6 py-3.5 bg-denim-600 text-black border-1 rounded-lg font-bold hover:bg-denim-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105"
+        >
+          <Plus className="w-5 h-5 font-bold" />
           New Inspection
         </button>
       </div>
 
       <StatsOverview {...statsData} />
       
-      <InspectionHistoryTable inspections={inspections} />
+      <InspectionHistoryTable inspections={inspections} onUpdateInspection={handleUpdateInspection} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <DefectCategories categories={defectCategories} />
@@ -126,10 +164,8 @@ export const QualityControlTemplate = () => {
       </div>
 
       <QCChecklist items={checklistItems} />
-      {/* Light-weight frontend-only QC list and quick create */}
-      <div>
-        <QCList />
-      </div>
+
+      <InspectionModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </div>
   );
 };

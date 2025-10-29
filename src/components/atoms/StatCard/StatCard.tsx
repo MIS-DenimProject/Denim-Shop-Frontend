@@ -24,7 +24,7 @@ export const StatCard: FC<StatCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl border border-neutral-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="bg-linear-to-br from-denim-600 to-denim-700 rounded-xl p-6 text-black  border-1 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <h3 className="text-sm font-medium text-neutral-600 mb-2">
         {label}
       </h3>

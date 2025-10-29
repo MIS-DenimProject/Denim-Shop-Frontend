@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { StageIcon } from "@/components";
+import {  } from "@/components";
 import { ArrowRight } from "lucide-react";
 
 interface PipelineStageCardProps {
@@ -13,7 +13,7 @@ export const PipelineStageCard: FC<PipelineStageCardProps> = ({ stage, count, sh
     <div className="flex items-center gap-4">
       <div className="bg-white rounded-xl border border-neutral-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex-1">
         <div className="flex flex-col items-center gap-3">
-          <StageIcon stage={stage} isActive={true} />
+         
           <div className="text-center">
             <h3 className="text-sm font-medium text-neutral-600 mb-1">{stage}</h3>
             <p className="text-3xl font-bold text-neutral-900">{count}</p>
