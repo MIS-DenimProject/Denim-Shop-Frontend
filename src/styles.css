@@ -82,6 +82,49 @@
   background: linear-gradient(135deg, var(--denim-600) 0%, var(--denim-500) 100%);
 }
 
+/* ===== Modal Animations ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 200ms ease-out;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 200ms ease-out;
+}
+
+/* ===== Toast Animations ===== */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 300ms ease-out;
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -269,4 +312,5 @@ a {
 .gpu-accelerate {
   transform: translateZ(0);
   will-change: transform;
+}
 }

@@ -11,6 +11,15 @@ import { Title } from "@/components/molecules/Title";
 import { LayoutDashboard } from "lucide-react";
 
 export const DashboardTemplate = () => {
+  // Sample pipeline data for dashboard
+  const pipelineData = [
+    { stage: "Cutting" as const, count: 320 },
+    { stage: "Assembling" as const, count: 280 },
+    { stage: "Sewing" as const, count: 250 },
+    { stage: "Dyeing" as const, count: 180 },
+    { stage: "Ironing/QC" as const, count: 150 },
+  ];
+
   return (
     <div className="w-full mx-auto flex flex-col gap-6">
       {/* Page Header */}
@@ -45,7 +54,7 @@ export const DashboardTemplate = () => {
           <InventoryAlerts />
         </div>
         <div className="w-[30%]">
-          <ProductionPipeline />
+          <ProductionPipeline data={pipelineData} />
         </div>
         <div className="w-[30%]">
            <RecentOrders />
