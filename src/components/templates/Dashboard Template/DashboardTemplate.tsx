@@ -5,7 +5,7 @@ import {
   PieChartForStages,
   InventoryAlerts,
   RecentOrders,
-  ProductionPipeline,
+  ProductionPipelineT,
 } from "@/components";
 import { Title } from "@/components/molecules/Title";
 import { LayoutDashboard } from "lucide-react";
@@ -54,7 +54,7 @@ export const DashboardTemplate = () => {
           <InventoryAlerts />
         </div>
         <div className="w-[30%]">
-          <ProductionPipeline data={pipelineData} />
+          <ProductionPipelineT data={pipelineData} />
         </div>
         <div className="w-[30%]">
            <RecentOrders />
